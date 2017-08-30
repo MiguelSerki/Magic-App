@@ -1,0 +1,15 @@
+package PJ;
+
+public class Personaje {
+	private int vida;
+	private int daño;
+	private String arma;
+	private String armadura;
+	
+	public Personaje () {
+		vida = 10;
+		daño = 1;
+		arma = "Puño";
+		armadura = "Desnudo";
+	}
+}

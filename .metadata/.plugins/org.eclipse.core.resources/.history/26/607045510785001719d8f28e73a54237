@@ -1,0 +1,10 @@
+import javax.swing.JPanel;
+
+public class Window {
+
+	public static void main(String[] args) {
+
+		JPanel panel = new JPanel (800, 600, 16, 75);
+	}
+
+}

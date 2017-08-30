@@ -1,0 +1,13 @@
+import java.awt.DisplayMode;
+
+import javax.swing.JFrame;
+
+public class Window {
+
+	public static void main(String[] args) {
+
+		JFrame window = new JFrame ();
+		DisplayMode displayMode = new DisplayMode (800, 600, 16, 75);
+	}
+
+}

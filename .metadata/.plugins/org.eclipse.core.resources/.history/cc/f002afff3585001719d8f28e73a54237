@@ -1,0 +1,10 @@
+package PJ;
+
+public interface BuilderCharacterInterface {
+	Personaje personaje;
+	
+	void buildStats();
+	void buildArma(Arma arma);
+	void buildArmadura (Armadura armadura);
+	String toString ();
+}

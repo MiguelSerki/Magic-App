@@ -1,0 +1,23 @@
+package PJ;
+
+public class BuilderCharacter implements BuilderCharacterInterface{
+
+	@Override
+	public void buildStats() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void buildArma(Arma arma) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void buildArmadura(Armadura armadura) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
