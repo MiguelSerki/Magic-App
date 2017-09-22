@@ -1,0 +1,88 @@
+package PruebaWorkbook.app;
+import java.io.IOException;
+import org.jsoup.select.Elements;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
+
+
+public class JsoupRun {
+
+	private static String price;
+	private static String category;
+	private static String name;
+	private static String expansion;
+	private static String link;
+	private static int amount;
+	
+	public void getLink (String string) {
+		this.link = string;
+	}
+	
+	public int getData () {
+		Document d;
+		try {
+			d = Jsoup.connect (this.getLink()).timeout(9000).get();
+			if (!(d.hasText())) {
+				return 1;
+			}
+			else {
+		Elements ele=d.getElementsByTag("form");
+		for (Element element : ele) {
+			String precio = element.getElementsByAttributeValue("itemprop", "price").text();
+			if (!(precio.isEmpty())) {
+				price = precio;
+			}
+			String categoria = element.getElementsByAttributeValue("itemprop", "category").text();
+			if (!(categoria.isEmpty())) {
+				category = categoria;
+			}
+			
+		}
+		
+		Elements n = d.getElementsByTag("span");
+		for (Element element : n) {
+			String nombre = element.getElementsByAttributeValue("itemprop", "name").text();
+			if (!(nombre.isEmpty())) {
+				name = nombre;
+			}
+		}
+		
+		Elements e = d.getElementsByAttributeValue("name", "ed");
+		for (Element element : e) {
+			String ex = element.getElementsByAttribute("selected").text();
+			if (!(ex.isEmpty())) {
+				expansion = ex;
+			}
+		}
+		}} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public String getPrice () {
+		return this.price;
+	}
+	public String getCategory () {
+		return this.category;
+	}
+	public String getName () {
+		return this.name;
+	}
+	public String getExpansion() {
+		return this.expansion;
+	}
+	public String getLink() {
+		return this.link;
+	}
+	public void setAmount (int i) {
+		this.amount = i;
+	}
+	
+	public int getAmount () {
+		return this.amount;
+	}
+}

@@ -1,7 +1,0 @@
-package PJ;
-
-public interface BuilderCharacter {
-	void buildStats();
-	void buildArma(Arma arma);
-	void buildArmadura (Armadura armadura);
-}
