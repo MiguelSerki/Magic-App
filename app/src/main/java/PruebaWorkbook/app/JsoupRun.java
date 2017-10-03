@@ -9,7 +9,7 @@ import org.jsoup.nodes.Element;
 
 public class JsoupRun {
 
-	private static String price;
+	private static double price;
 	private static String category;
 	private static String name;
 	private static String expansion;
@@ -29,18 +29,19 @@ public class JsoupRun {
 			}
 			else {
 		Elements ele=d.getElementsByTag("form");
+		String priceTemp = null;
 		for (Element element : ele) {
-			String precio = element.getElementsByAttributeValue("itemprop", "price").text();
-			if (!(precio.isEmpty())) {
-				price = precio;
-			}
+			String preci = (element.getElementsByAttributeValue("itemprop", "price").text());
+			if (!(preci.isEmpty())) {
+				priceTemp = preci;
+				}
 			String categoria = element.getElementsByAttributeValue("itemprop", "category").text();
 			if (!(categoria.isEmpty())) {
 				category = categoria;
 			}
-			
 		}
-		
+		StringToInt converter = new StringToInt ();
+		price = converter.converter(priceTemp);
 		Elements n = d.getElementsByTag("span");
 		for (Element element : n) {
 			String nombre = element.getElementsByAttributeValue("itemprop", "name").text();
@@ -63,7 +64,7 @@ public class JsoupRun {
 		return 0;
 	}
 	
-	public String getPrice () {
+	public double getPrice () {
 		return this.price;
 	}
 	public String getCategory () {
@@ -84,5 +85,8 @@ public class JsoupRun {
 	
 	public int getAmount () {
 		return this.amount;
+	}
+	public String getAll () {
+		return this.name +" " +this.expansion +" "+ this.category +" "+ this.price;
 	}
 }

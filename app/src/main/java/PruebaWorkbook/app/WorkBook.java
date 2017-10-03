@@ -13,7 +13,7 @@ public class WorkBook{
 	private FileInputStream document;
 	private HSSFWorkbook workbook;
 	private HSSFSheet sheet;
-	private String price;
+	private double price;
 	private String category;
 	private String name;
 	private String expansion;
@@ -21,7 +21,7 @@ public class WorkBook{
 	private int amount;
 	
 	
-	public WorkBook (int rowNumber, int cellNumber, String nombre, String name, String category, String price, String expansion, String link,int amount) throws IOException{
+	public WorkBook (int rowNumber, int cellNumber, String nombre, String name, String category, double price, String expansion, String link,int amount) throws IOException{
 		FileInputStream document = new FileInputStream(new File(nombre));
 	      //Get the workbook instance for XLSX file 
 		 HSSFWorkbook workbook = new HSSFWorkbook(document); 
