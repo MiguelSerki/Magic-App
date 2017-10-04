@@ -17,6 +17,10 @@ public class JsoupRun {
 	private static int amount;
 	
 	public void getLink (String string) {
+		if (string.isEmpty()){
+			
+		}
+		
 		this.link = string;
 	}
 	

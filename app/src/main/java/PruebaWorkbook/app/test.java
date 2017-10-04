@@ -38,6 +38,7 @@ public class test extends JFrame {
 	private JTable table;
 	private String[]column;
 	private Object [][] row;
+	private WorkBookTabla wt;
 	/**
 	 * Launch the application.
 	 */
@@ -82,7 +83,7 @@ public class test extends JFrame {
 				JOptionPane.showMessageDialog(null, "Invalido, intente de nuevo");
 			}
 			else {
-				((DefaultTableModel) table.getModel()).addRow(new Object[]{jsoup.getName(),jsoup.getAmount(),jsoup.getExpansion(),jsoup.getCategory(),jsoup.getPrice(), (jsoup.getAmount()*jsoup.getPrice()), jsoup.getLink()});
+				((DefaultTableModel) table.getModel()).addRow(new Object[]{jsoup.getName(),jsoup.getAmount(),jsoup.getExpansion(),jsoup.getCategory(),jsoup.getPrice(), jsoup.getLink()});
 /*				try {
 					excel = new WorkBook (rowInt, cell, "Pedido.xls", jsoup.getName(),jsoup.getCategory(),jsoup.getPrice(),jsoup.getExpansion(),jsoup.getLink(),jsoup.getAmount() );
 				} catch (IOException e) {
@@ -100,7 +101,6 @@ public class test extends JFrame {
 				"Edición",
 				"Condición",
 				"Precio", 
-				"Subtotal", 
 				"Link"};
 row = new Object[][] {{}
 };
@@ -108,36 +108,50 @@ row = new Object[][] {{}
 		
 		JLabel lblInserteElLink = new JLabel("Inserte el link de la carta");
 		lblInserteElLink.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JButton btnFinalizar = new JButton("Finalizar");
+		btnFinalizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				wt = new WorkBookTabla (table);
+				wt.printTable();
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(547)
 					.addComponent(btnAgregar))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
-					.addContainerGap())
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-					.addContainerGap()
 					.addComponent(textField, GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
 					.addContainerGap())
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblInserteElLink, GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
+					.addContainerGap())
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addContainerGap(675, Short.MAX_VALUE)
+					.addComponent(btnFinalizar)
+					.addContainerGap())
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(4)
-					.addComponent(lblInserteElLink, GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+					.addComponent(lblInserteElLink, GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(btnAgregar)
 					.addGap(18)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 388, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnFinalizar)
 					.addContainerGap())
 		);
 		
@@ -146,11 +160,11 @@ row = new Object[][] {{}
 			new Object[][] {
 			},
 			new String[] {
-				"Nombre de la carta", "Cantidad", "Edici\u00F3n", "Condici\u00F3n", "Precio", "Subtotal", "Link"
+				"Nombre de la carta", "Cantidad", "Edici\u00F3n", "Condici\u00F3n", "Precio", "Link"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, Integer.class, String.class, String.class, Double.class, Double.class, String.class
+				String.class, Integer.class, String.class, String.class, Double.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -161,8 +175,7 @@ row = new Object[][] {{}
 		table.getColumnModel().getColumn(2).setPreferredWidth(128);
 		table.getColumnModel().getColumn(3).setPreferredWidth(121);
 		table.getColumnModel().getColumn(4).setPreferredWidth(54);
-		table.getColumnModel().getColumn(5).setPreferredWidth(62);
-		table.getColumnModel().getColumn(6).setPreferredWidth(220);
+		table.getColumnModel().getColumn(5).setPreferredWidth(200);
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 	}
