@@ -38,7 +38,6 @@ public class test extends JFrame {
 	private JTable table;
 	private String[]column;
 	private Object [][] row;
-	private WorkBookTabla wt;
 	/**
 	 * Launch the application.
 	 */
@@ -84,15 +83,8 @@ public class test extends JFrame {
 			}
 			else {
 				((DefaultTableModel) table.getModel()).addRow(new Object[]{jsoup.getName(),jsoup.getAmount(),jsoup.getExpansion(),jsoup.getCategory(),jsoup.getPrice(), jsoup.getLink()});
-/*				try {
-					excel = new WorkBook (rowInt, cell, "Pedido.xls", jsoup.getName(),jsoup.getCategory(),jsoup.getPrice(),jsoup.getExpansion(),jsoup.getLink(),jsoup.getAmount() );
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			*/
 				}
 			textField.setText(null);
-			rowInt ++;
 			}
 		});
 		
@@ -112,8 +104,13 @@ row = new Object[][] {{}
 		JButton btnFinalizar = new JButton("Finalizar");
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				wt = new WorkBookTabla (table);
-				wt.printTable();
+				excel = new WorkBook ();
+				try {
+					excel.edditExcel(rowInt, cell, "Pedido.xls", table);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
