@@ -13,11 +13,11 @@
 <fullyQualifiedTypeName name="org.apache.poi.hssf.usermodel.HSSFCell"/>
 <fullyQualifiedTypeName name="org.jsoup.nodes.Element"/>
 <fullyQualifiedTypeName name="org.w3c.dom.Document"/>
-<fullyQualifiedTypeName name="org.jsoup.select.Elements"/>
 <fullyQualifiedTypeName name="javax.swing.JLabel"/>
 <fullyQualifiedTypeName name="java.util.Vector"/>
 <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
 <fullyQualifiedTypeName name="javax.swing.JTable"/>
 <fullyQualifiedTypeName name="org.jsoup.Jsoup"/>
 <fullyQualifiedTypeName name="org.jsoup.nodes.Document"/>
+<fullyQualifiedTypeName name="org.jsoup.select.Elements"/>
 </qualifiedTypeNameHistroy>

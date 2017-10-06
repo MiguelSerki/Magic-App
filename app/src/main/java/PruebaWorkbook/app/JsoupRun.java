@@ -32,6 +32,12 @@ public class JsoupRun {
 				return 1;
 			}
 			else {
+		String test = d.getElementsByTag("meta").attr("description");
+				System.out.println(test);
+	
+			System.out.println("No texto padre");
+		
+		
 		Elements ele=d.getElementsByTag("form");
 		String priceTemp = null;
 		for (Element element : ele) {
@@ -46,13 +52,8 @@ public class JsoupRun {
 		}
 		StringToInt converter = new StringToInt ();
 		price = converter.converter(priceTemp);
-		Elements n = d.getElementsByTag("span");
-		for (Element element : n) {
-			String nombre = element.getElementsByAttributeValue("itemprop", "name").text();
-			if (!(nombre.isEmpty())) {
-				name = nombre;
-			}
-		}
+		Elements n = d.select("meta[property=og:title]");
+		name = n.attr("content");
 		
 		Elements e = d.getElementsByAttributeValue("name", "ed");
 		for (Element element : e) {
