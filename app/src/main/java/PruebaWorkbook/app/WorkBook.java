@@ -10,18 +10,21 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.*;
 
-public class WorkBook {
+public class WorkBook<XSSFWorkbook, XSSFSheet> {
 
 	private FileInputStream document;
-	private HSSFWorkbook workbook;
-	private HSSFSheet sheet;
+	private XSSFWorkbook workbook;
+	private XSSFSheet sheet;
 	private double price;
 	private String category;
 	private String name;
 	private String expansion;
 	private String link;
+	private String language;
+	private String condition;
 	private int amount;
 	private JTable table;
+	
 
 	public WorkBook() {
 
@@ -34,12 +37,21 @@ public class WorkBook {
 		this.expansion = expansion;
 		this.link = link;
 		this.amount = amount;
+		if (category.startsWith("English")) {
+			language = "English";
+		}else {
+			language = "Chinese";
+		}
+		if (category.endsWith("Regular")){
+			condition = "Regular";
+		}else {
+			condition = "Foil";
+		}
 	}
 
-	public void edditExcel(int rowNumber, int cellNumber, String nombre, JTable table) throws IOException {
+	public void edditExcel(int rowNumber, int cellNumber, String nombre, JTable table, String buyer) throws IOException {
 		FileInputStream document = new FileInputStream(new File(nombre));
 		HSSFWorkbook workbook = new HSSFWorkbook(document);
-		System.out.println("File open successfully.");
 		HSSFSheet sheet = workbook.getSheetAt(0);
 		int row = sheet.getRow(rowNumber).getRowNum();
 		Cell cell = null;
@@ -48,20 +60,24 @@ public class WorkBook {
 					table.getModel().getValueAt(i, 2).toString(), table.getModel().getValueAt(i, 3).toString(),
 					(Double) table.getModel().getValueAt(i, 4), table.getModel().getValueAt(i, 5).toString());
 			cell = sheet.getRow(row).getCell(cellNumber);
-			System.out.println("Writing into file");
 			cell.setCellValue(this.name);
 			cell = sheet.getRow(row).getCell((cellNumber + 1));
 			cell.setCellValue(this.amount);
 			cell = sheet.getRow(row).getCell((cellNumber + 2));
 			cell.setCellValue(this.expansion);
 			cell = sheet.getRow(row).getCell((cellNumber + 3));
-			cell.setCellValue(this.category);
+			cell.setCellValue(this.language);
+			cell = sheet.getRow(row).getCell((cellNumber + 4));
+			cell.setCellValue(this.condition);
 			cell = sheet.getRow(row).getCell((cellNumber + 5));
 			cell.setCellValue(this.price);
 			cell = sheet.getRow(row).getCell((cellNumber + 7));
 			cell.setCellValue(this.link);
 			row++;
 		}
+		Row row2 = sheet.getRow(21);
+		cell = sheet.getRow(row2.getRowNum()).getCell(3);
+		cell.setCellValue(buyer);
 		document.close();
 		// Open FileOutputStream to write updates
 		FileOutputStream output_file = new FileOutputStream(new File(nombre));
@@ -70,9 +86,8 @@ public class WorkBook {
 		workbook.close();
 		// close the stream
 		output_file.close();
-		System.out.println("Writing succesful!");
 	}
-
+	
 	public FileInputStream getDocument() {
 		return document;
 	}
@@ -81,19 +96,20 @@ public class WorkBook {
 		this.document = document;
 	}
 
-	public HSSFWorkbook getWorkbook() {
+	public XSSFWorkbook getWorkbook() {
 		return workbook;
 	}
 
-	public void setWorkbook(HSSFWorkbook workbook) {
+	public void setWorkbook(XSSFWorkbook workbook) {
 		this.workbook = workbook;
 	}
 
-	public HSSFSheet getSheet() {
+	public XSSFSheet getSheet() {
 		return sheet;
 	}
 
-	public void setSheet(HSSFSheet sheet) {
+	public void setSheet(XSSFSheet sheet) {
 		this.sheet = sheet;
 	}
+
 }

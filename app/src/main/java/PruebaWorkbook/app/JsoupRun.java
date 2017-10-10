@@ -16,28 +16,27 @@ public class JsoupRun {
 	private static String link;
 	private static int amount;
 	
-	public void getLink (String string) {
+	public int getLink (String string) {
 		if (string.isEmpty()){
-			
+			return 1;
 		}
-		
+		else if (!(string.startsWith("http://www.mtgmintcard.com/mtg/singles/"))) {
+			return 1;
+		}
+		else {
 		this.link = string;
+		return 0;}
 	}
 	
 	public int getData () {
 		Document d;
+		
 		try {
 			d = Jsoup.connect (this.getLink()).timeout(9000).get();
 			if (!(d.hasText())) {
 				return 1;
 			}
 			else {
-		String test = d.getElementsByTag("meta").attr("description");
-				System.out.println(test);
-	
-			System.out.println("No texto padre");
-		
-		
 		Elements ele=d.getElementsByTag("form");
 		String priceTemp = null;
 		for (Element element : ele) {
@@ -50,6 +49,7 @@ public class JsoupRun {
 				category = categoria;
 			}
 		}
+
 		StringToInt converter = new StringToInt ();
 		price = converter.converter(priceTemp);
 		Elements n = d.select("meta[property=og:title]");
@@ -87,7 +87,6 @@ public class JsoupRun {
 	public void setAmount (int i) {
 		this.amount = i;
 	}
-	
 	public int getAmount () {
 		return this.amount;
 	}
