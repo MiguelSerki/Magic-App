@@ -58,14 +58,17 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
+			<item value="Veterinariapp.alpha"/>
 			<item value="PruebaWorkbook.app"/>
 			<item value="excel.test"/>
 		</list>
 		<list key="groupId">
+			<item value="Veterinariapp"/>
 			<item value="PruebaWorkbook"/>
 			<item value="excel"/>
 		</list>
 		<list key="artifactId">
+			<item value="alpha"/>
 			<item value="app"/>
 			<item value="test"/>
 		</list>

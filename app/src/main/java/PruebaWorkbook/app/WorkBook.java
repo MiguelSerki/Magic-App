@@ -56,9 +56,12 @@ public class WorkBook<XSSFWorkbook, XSSFSheet> {
 		int row = sheet.getRow(rowNumber).getRowNum();
 		Cell cell = null;
 		for (int i = 0; i < table.getModel().getRowCount(); i++) {
-			this.getData(table.getModel().getValueAt(i, 0).toString(), (Integer) table.getModel().getValueAt(i, 1),
-					table.getModel().getValueAt(i, 2).toString(), table.getModel().getValueAt(i, 3).toString(),
-					(Double) table.getModel().getValueAt(i, 4), table.getModel().getValueAt(i, 5).toString());
+			this.getData(table.getModel().getValueAt(i, 0).toString(),
+					(Integer) table.getModel().getValueAt(i, 1),
+					table.getModel().getValueAt(i, 2).toString(),
+					table.getModel().getValueAt(i, 3).toString(),
+					(Double) table.getModel().getValueAt(i, 4),
+					table.getModel().getValueAt(i, 5).toString());
 			cell = sheet.getRow(row).getCell(cellNumber);
 			cell.setCellValue(this.name);
 			cell = sheet.getRow(row).getCell((cellNumber + 1));
